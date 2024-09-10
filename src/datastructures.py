@@ -21,15 +21,24 @@ class FamilyStructure:
 
     def add_member(self, member):
         # fill this method and update the return
-        pass
+        if not member.get('id'):
+            member["id"] = self._generateId() #le pongo al diccionario una clave id ramdon        
+        return self._members.append(member)
 
     def delete_member(self, id):
         # fill this method and update the return
-        pass
+        for member in self._members:
+            if member["id"] == id:
+                self._members.remove(member)
+            return True
+       
 
     def get_member(self, id):
         # fill this method and update the return
-        pass
+        for miembro in self._members:
+            if miembro[id] == id:
+             return miembro
+        return None
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
