@@ -41,15 +41,15 @@ jackson_family.add_member(john)
 jackson_family.add_member(jane)
 jackson_family.add_member(jimmy)
 
-# # Handle/serialize errors like a JSON object
-# @app.errorhandler(APIException)
-# def handle_invalid_usage(error):
-#     return jsonify(error.to_dict()), error.status_code
+# Handle/serialize errors like a JSON object
+@app.errorhandler(APIException)
+def handle_invalid_usage(error):
+    return jsonify(error.to_dict()), error.status_code
 
-# # generate sitemap with all your endpoints
-# @app.route('/')
-# def sitemap():
-#     return generate_sitemap(app)
+# generate sitemap with all your endpoints
+@app.route('/')
+def sitemap():
+    return generate_sitemap(app)
 
 @app.route('/members', methods=['GET'])
 def obtener_miembros():
@@ -67,7 +67,7 @@ def crear_miembro():
     nuevo_miembro= request.json
    
     jackson_family.add_member(nuevo_miembro)
-    return jsonify({'done':"usuario ok"}), 201 
+    return jsonify({'done':"usuario ok"}), 200 
     
 
 @app.route('/member/<int:member_id>', methods=['DELETE'])
@@ -75,7 +75,7 @@ def borrar_miembro(member_id):
     borrado= jackson_family.delete_member(member_id)
     if not borrado:
         return jsonify({"msg":"familiar no encontrado"}), 400
-    return jsonify({"done":"familiar borrado"}), 200
+    return {"done": True}, 200
 
 
 

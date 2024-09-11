@@ -30,13 +30,14 @@ class FamilyStructure:
         for member in self._members:
             if member["id"] == id:
                 self._members.remove(member)
-            return True
+                return True
+        return False
        
 
     def get_member(self, id):
         # fill this method and update the return
         for miembro in self._members:
-            if miembro[id] == id:
+            if miembro["id"] == id:
              return miembro
         return None
 
